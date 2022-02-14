@@ -53,10 +53,10 @@ class GithubSource
             }
 
             $postInformation[] = [
-                'repo_name'             => $repo['name'], // Set to title
+                'repo_name'        => $repo['name'], // Set to title
                 'description'      => $repo['description'], // Set to excerpt
                 'read_me'          => $readMe, // set to body
-                'html_url'          => $repo['html_url'], // use link in a find on github button
+                'html_url'         => $repo['html_url'], // use link in a find on github button
                 'language'         => $repo['language'], // use to categorise
                 'created_at'       => $repo['created_at'], // timestamp
                 'updated_at'       => $repo['updated_at'], // timestamp
