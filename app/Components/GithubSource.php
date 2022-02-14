@@ -24,6 +24,9 @@ class GithubSource
             $readMe = 'There is no read me for this repo, please write one :)';
         }
 
+        $readMe = $this->client->api('markdown')->render($readMe, 'markdown');
+
+
         return [
             'repo_name'        => $repo['name'], // Set to title
             'description'      => $repo['description'], // Set to excerpt
