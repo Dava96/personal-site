@@ -1,6 +1,6 @@
 <!doctype html>
 
-<title>Laravel From Scratch Blog</title>
+<title>Personal Site</title>
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
@@ -44,10 +44,6 @@
                 {{--            TODO USE LINK BUTTONS HERE--}}
                 <a href="/login" class="ml-6 text-xs font-bold uppercase">Log In</a>
             @endauth
-            <a href="#"
-               class="ml-3 bg-gray-700 text-white font-semibold text-xs py-2 px-10 rounded-2xl hover:bg-gray-800">
-                Subscribe for Updates
-            </a>
         </div>
     </nav>
 
@@ -81,7 +77,5 @@
         </div>
     </footer>
 </section>
-
 <x-flash/>
-
 </body>

@@ -5,7 +5,7 @@
     <div class="py-6 px-5 lg:flex">
         <div class="flex-1 lg:mr-8">
             <a href="/posts/{{ $post->slug }}">
-                <img src="{{asset('storage/' . $post->thumbnail )}}" alt="Blog Post illustration" class="rounded-xl object-scale-down">
+                <img src="{{asset('storage/' . $post->thumbnail )}}" alt="Blog Post illustration" class="w-full rounded-xl">
             </a>
 
         </div>

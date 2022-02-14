@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminPostController;
+use App\Http\Controllers\GithubController;
 use App\Http\Controllers\PostCommentsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
@@ -25,6 +26,8 @@ Route::post('posts/{post:slug}/comments', [PostCommentsController::class, 'store
 Route::middleware('can:admin')->group(function () {
     Route::post('admin/posts', [AdminPostController::class, 'store']);
     Route::get('admin/posts/create', [AdminPostController::class, 'create']);
+    Route::get('admin/posts/github-create', [GithubController::class, 'create'])->name('posts.github.create');
+    Route::post('admin/posts/github-create', [GithubController::class, 'store'])->name('posts.github.store');
     Route::get('admin/posts', [AdminPostController::class, 'index']);
     Route::get('admin/posts/{post}/edit', [AdminPostController::class, 'edit']);
     Route::patch('admin/posts/{post}', [AdminPostController::class, 'update']);

@@ -19,7 +19,11 @@ class DatabaseSeeder extends Seeder
     {
 
         $user = User::factory()->create([
-            'name' => 'David Lomath-Connis'
+            'name' => 'David Lomath-Connis',
+            'username' => 'DavidLomathConnis',
+            'github_username' => 'Dava96',
+            'password' => 'password',
+            'email' => 'david1@gmail.com',
         ]);
         Post::factory(9)->create([
             'user_id' => $user->id

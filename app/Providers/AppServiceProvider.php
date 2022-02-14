@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Components\GithubSource;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Gate;
@@ -17,7 +18,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(GithubSource::class, function ($app) {
+            return new GithubSource(config('github.access_token'));
+        });
     }
 
     /**

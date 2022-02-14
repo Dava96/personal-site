@@ -5,26 +5,31 @@
         {{$heading}}
     </h1>
 
-    <div class="flex">
-        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-        <aside class="w-48 mr-1 pl-2 flex-shrink-0">
-            <h4 class="font-semibold mb-1 mt-2 text-center border-b">
-                Links
-            </h4>
-            <ul>
-                <li class="px-3 py-4 whitespace-nowrap border-b rounded min-w-full">
-                    <a href="/admin/posts" class="{{request()->is('admin/posts') ? 'text-blue-500' : ''}}">All Posts</a>
-                </li>
-                <li class="px-3 py-4 whitespace-nowrap border-b rounded min-w-full">
-                    <a href="/admin/posts/create" class="{{request()->is('admin/posts/create') ? 'text-blue-500' : ''}}">New Post</a>
-                </li>
+        <main class="flex">
 
-            </ul>
-        </aside>
-        </div>
+            <x-panel class="flex">
 
-        <main class="flex-1">
-            <x-panel>
+                <div class="flex">
+                    <div class="overflow-hidden border-r sm:rounded-lg mr-5">
+                        <aside class="w-48 mr-1 pl-2 flex-shrink-0">
+                            <h4 class="font-semibold mb-1 mt-2 text-center border-b">
+                                Links
+                            </h4>
+                            <ul>
+                                <li class="px-3 py-4 whitespace-nowrap border-b rounded min-w-full">
+                                    <a href="/admin/posts" class="{{request()->is('admin/posts') ? 'text-blue-500' : ''}}">All Posts</a>
+                                </li>
+                                <li class="px-3 py-4 whitespace-nowrap border-b rounded min-w-full">
+                                    <a href="/admin/posts/create" class="{{request()->is('admin/posts/create') ? 'text-blue-500' : ''}}">New Post</a>
+                                </li>
+                                <li class="px-3 py-4 whitespace-nowrap border-b rounded min-w-full">
+                                    <a href="/admin/posts/github-create" class="{{request()->is('admin/posts/github-create') ? 'text-blue-500' : ''}}">Github New Post</a>
+                                </li>
+
+                            </ul>
+                        </aside>
+                    </div>
+
                 {{$slot}}
             </x-panel>
         </main>
