@@ -44,6 +44,7 @@ class GithubController extends Controller
         $githubRepo->save();
         $post->save();
 
+
         return redirect('/');
     }
 }

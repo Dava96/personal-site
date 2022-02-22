@@ -42,6 +42,21 @@ class GithubSource
         ];
     }
 
+    public function getUserInformation($username) {
+        $user = $this->client->api('user')->show($username);
+
+        return [
+            'github_name'=> $user['name'],
+            'company'    => $user['company'],
+            'location'   => $user['location'],
+            'bio'        => $user['bio'],
+            'followers'  => $user['followers'],
+            'following'  => $user['following'],
+            'avatar_url' => $user['avatar_url'],
+        ];
+
+    }
+
     public function getPostInformationFromRepos() {
         $repos = $this->client->api('user')->repositories('Dava96');
 

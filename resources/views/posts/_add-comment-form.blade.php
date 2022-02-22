@@ -7,7 +7,6 @@
                      class="rounded-xl">
                 <h2 class="ml-4">Join the conversation!</h2>
             </header>
-{{--TODO Use Blade component instead--}}
             <div class="mt-5">
                             <textarea class="w-full text-sm bg-gray-100 focus:outline-none focus:ring"
                                       name="body"

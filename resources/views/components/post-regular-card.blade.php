@@ -5,14 +5,14 @@
     <div class="py-6 px-5">
         <div>
             <a href="/posts/{{ $post->slug }}">
-                <img src="{{(asset('storage/' . $post->thumbnail ))}}" alt="Blog Post illustration" class="w-full rounded-xl">
+                @include('posts._post-picture')
             </a>
         </div>
 
         <div class="mt-8 flex flex-col justify-between">
             <header>
                 <div class="space-x-2">
-                    <x-category-button :category="$post->category"/>
+                    <x-category-button :category="$post->category" class="w-15 h-15"/>
                 </div>
 
                 <div class="mt-4">
@@ -28,25 +28,16 @@
                 </div>
             </header>
 
-            <div class="text-sm mt-4">
+            <div class="prose text-sm mt-4">
                 <p>
                     {{ $post->excerpt }}
-                </p>
-
-                <p class="mt-4">
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                    pariatur.
                 </p>
             </div>
 
             <footer class="flex justify-between items-center mt-8">
                 <div class="flex items-center text-sm">
                     <a href="/?author={{ $post->author->username}}">
-                        <img src="/images/lary-avatar.svg" alt="Lary avatar">
-                        <div class="ml-3">
-                            <h5 class="font-bold">
-                                {{ $post->author->username }}
-                            </h5>
+                        <x-user-information :post="$post"/>
                     </a>
                 </div>
         </div>

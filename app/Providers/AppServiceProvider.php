@@ -19,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(GithubSource::class, function ($app) {
+//            TODO Add pass a client to allow mocking tests??
             return new GithubSource(config('github.access_token'));
         });
     }

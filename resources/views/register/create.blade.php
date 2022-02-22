@@ -9,7 +9,7 @@
 
                     <x-form.input name="name" required />
                     <x-form.input name="username" required />
-                    <x-form.input name="Github username" required />
+                    <x-form.input name="github_username" required />
                     <x-form.input name="email" type="email" required />
                     <x-form.input name="password" type="password" autocomplete="new-password" required />
 
