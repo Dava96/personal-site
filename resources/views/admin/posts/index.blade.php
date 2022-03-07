@@ -13,6 +13,7 @@
                             </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
+
                             @foreach ($posts as $post)
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap">

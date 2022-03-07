@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminPostController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\GithubController;
 use App\Http\Controllers\PostCommentsController;
 use App\Http\Controllers\PostController;

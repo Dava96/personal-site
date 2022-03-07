@@ -50,10 +50,14 @@ return [
         ],
 
         'mailgun' => [
+            'domain' => env('MAILGUN_DOMAIN'),
+            'secret' => env('MAILGUN_SECRET'),
+            'endpoint' => env('MAILGUN_ENDPOINT', 'api.eu.mailgun.net'),
             'transport' => 'mailgun',
         ],
 
         'postmark' => [
+            'token' => env('POSTMARK_TOKEN'),
             'transport' => 'postmark',
         ],
 
@@ -74,6 +78,7 @@ return [
         'failover' => [
             'transport' => 'failover',
             'mailers' => [
+                'mailgun',
                 'smtp',
                 'log',
             ],
@@ -95,6 +100,8 @@ return [
         'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
+
+    'notification_recipient' => 'admin@test.com',
 
     /*
     |--------------------------------------------------------------------------

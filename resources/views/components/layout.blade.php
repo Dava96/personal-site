@@ -11,9 +11,10 @@
 <body style="font-family: Open Sans, sans-serif">
 <section class="px-6 py-8">
     <nav class="md:flex md:justify-between md:items-center">
-        <div>
-            <a href="/">
-                <img src="/images/logo.svg" alt="Laracasts Logo" width="165" height="16">
+        <div class="relative min-h-0 flex-1 flex flex-col xl:w-80">
+            <a href="/" class="flex items-center">
+                <img src="/icons/logomark.min.svg" width="50" height="52">
+                <img src="/icons/logotype.min.svg" width="114" height="29" class="ml-3">
             </a>
         </div>
 
