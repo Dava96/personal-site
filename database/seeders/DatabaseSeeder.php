@@ -5,8 +5,11 @@ namespace Database\Seeders;
 use App\Components\GithubSource;
 use App\Models\Category;
 use App\Models\Comment;
+use App\Models\GithubRepo;
 use App\Models\Post;
 use App\Models\User;
+use Database\Factories\GithubRepoFactory;
+use Database\Factories\RepoFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -49,6 +52,8 @@ class DatabaseSeeder extends Seeder
         Category::factory(3)->create();
 
         Comment::factory(5)->create();
+
+        GithubRepo::factory(3)->create();
 
     }
 }

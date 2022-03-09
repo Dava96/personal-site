@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|GithubRepo newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|GithubRepo newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|GithubRepo query()
+ * @method static \Database\Factories\GithubRepoFactory factory(...$parameters)
  * @mixin Eloquent
  */
 class GithubRepo extends Model
