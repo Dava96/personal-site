@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\PostApiController;
-use App\Http\Controllers\RepoApiController;
-use App\Http\Controllers\UserApiController;
-use App\Models\GithubRepo;
+use App\Http\Controllers\API\PostApiController;
+use App\Http\Controllers\API\RepoApiController;
+use App\Http\Controllers\API\UserApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,10 +21,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/posts', [PostApiController::class, 'index']);
-
-Route::get('/users', [UserApiController::class, 'index']);
-
-Route::get('/repos', [RepoApiController::class, 'index']);
 
 
+Route::get('/posts', [PostApiController::class, 'index'])->name('post.api.index');
+Route::get('/posts/{post:slug}', [PostApiController::class, 'show'])->name('post.api.show');
+
+Route::get('/users', [UserApiController::class, 'index'])->name('user.api.index');
+Route::get('/users/{user:username}', [UserApiController::class, 'show'])->name('user.api.show');
+
+Route::get('/repos', [RepoApiController::class, 'index'])->name('repo.api.index');
+Route::get('/repos/{github_repos:repo_name}', [RepoApiController::class, 'show'])->name('repo.api.show');
