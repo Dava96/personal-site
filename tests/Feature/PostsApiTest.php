@@ -54,4 +54,18 @@ class PostsApiTest extends TestCase
                 ]
             ]);
     }
+
+    /**
+     * Test to create a post.
+     *
+     * @return void
+     */
+    public function testCreatePost() {
+        $post = Post::factory()->create();
+
+        $post['slug'] = 'create'; // Won't work with a duplicate slug
+
+        $this->post(route('post.api.create', $post->toArray()))
+            ->assertStatus(201);
+    }
 }

@@ -57,18 +57,20 @@ class GithubSource
 
     }
 
-    public function getPostInformationFromRepos() {
-        $repos = $this->client->api('user')->repositories('Dava96');
+    public function getPostInformationFromAllRepos($githubUser) {
+        $repos = $this->client->api('user')->repositories($githubUser);
 
         $postInformation = [];
 
         foreach($repos as $repo) {
 
             try {
-                $readMe = $this->client->api('repo')->readme('Dava96', $repo['name']);
+                $readMe = $this->client->api('repo')->readme($githubUser, $repo['name']);
             } catch(\Exception $e) {
                 $readMe = 'There is no read me for this repo, please write one :)';
             }
+
+            $readMe = $this->client->api('markdown')->render($readMe, 'markdown');
 
             $postInformation[] = [
                 'repo_name'        => $repo['name'], // Set to title
