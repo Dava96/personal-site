@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\CommentApiController;
 use App\Http\Controllers\API\PostApiController;
 use App\Http\Controllers\API\RepoApiController;
 use App\Http\Controllers\API\UserApiController;
@@ -25,6 +26,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/posts', [PostApiController::class, 'index'])->name('post.api.index');
 Route::get('/posts/{post:slug}', [PostApiController::class, 'show'])->name('post.api.show');
+Route::post('/posts', [PostApiController::class, 'create'])->name('post.api.create');
+
+Route::post('posts/{post:slug}/comment', [CommentApiController::class, 'store'])->name('comment.api.store');
 
 Route::get('/users', [UserApiController::class, 'index'])->name('user.api.index');
 Route::get('/users/{user:username}', [UserApiController::class, 'show'])->name('user.api.show');
