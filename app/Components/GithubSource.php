@@ -26,6 +26,10 @@ class GithubSource
 
         $readMe = $this->client->api('markdown')->render($readMe, 'markdown');
 
+        $pattern = '<h1.*?>\s.+'.$repo['name'].'<\/h1>\n?';
+        if (preg_match("/$pattern/", $readMe)) {
+            $readMe = $this->stripPostTitleFromBody($readMe, $pattern);
+        }
 
         return [
             'repo_name'        => $repo['name'], // Set to title
@@ -55,6 +59,10 @@ class GithubSource
             'avatar_url' => $user['avatar_url'],
         ];
 
+    }
+
+    public function stripPostTitleFromBody(string $readMe, string $pattern): string {
+        return preg_replace("/$pattern/", '', $readMe, 1);
     }
 
     public function getPostInformationFromAllRepos($githubUser) {
