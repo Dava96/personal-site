@@ -18,7 +18,6 @@ class UsersApiTest extends TestCase
      */
     public function testShowAllUsers()
     {
-
         $users = User::factory(2)->create()->map(function ($user) {
             return $user;
         });
@@ -26,6 +25,7 @@ class UsersApiTest extends TestCase
         $this->get(route('user.api.index'))
             ->assertStatus(200)
             ->assertJson($users->toArray())
+            ->assertJsonCount(2)
             ->assertJsonStructure([
                 '*' => [
                     'id',

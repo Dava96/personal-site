@@ -85,9 +85,6 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
-    public function getUsernameAttribute($username) {
-        return ucwords($username);
-    }
 
     public function setPasswordAttribute($password) {
         $this->attributes['password'] = bcrypt($password);
@@ -97,5 +94,4 @@ class User extends Authenticatable
         Mail::to(config('mail.notification_recipient'))
             ->queue(new CommentFormSubmission($this, $comment));
     }
-
 }
