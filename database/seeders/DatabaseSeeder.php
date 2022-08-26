@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'david1@gmail.com',
         ];
 
-        $details = array_merge($details, $githubSource->getUserInformation($details['github_username']));
+        //$details = array_merge($details, $githubSource->getUserInformation($details['github_username']));
         $user = User::factory()->create([
             'name'            => $details['name'],
             'username'        => $details['username'],
