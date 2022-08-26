@@ -37,12 +37,12 @@ class DatabaseSeeder extends Seeder
             'github_username' => $details['github_username'],
             'password'        => $details['password'],
             'email'           => $details['email'],
-            'company'         => $details['company'],
-            'location'        => $details['location'],
-            'bio'             => $details['bio'],
-            'followers'       => $details['followers'],
-            'following'       => $details['following'],
-            'avatar_url'      => $details['avatar_url'],
+            'company'         => $details['company'] ?? '',
+            'location'        => $details['location'] ?? '',
+            'bio'             => $details['bio'] ?? '',
+            'followers'       => $details['followers'] ?? '',
+            'following'       => $details['following'] ?? '',
+            'avatar_url'      => $details['avatar_url'] ?? '',
         ]);
 
         Post::factory(9)->create([
