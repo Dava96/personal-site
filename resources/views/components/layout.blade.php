@@ -42,8 +42,8 @@
                     </x-form.button>
                 </form>
             @else
-                <a href="/register" class="text-xs font-bold uppercase">Register</a>
-                <a href="/login" class="ml-6 text-xs font-bold uppercase">Log In</a>
+                <a href="/register" class="text-xs font-bold uppercase hover:text-blue-700">Register</a>
+                <a href="/login" class="ml-6 text-xs font-bold uppercase hover:text-blue-700">Log In</a>
             @endauth
         </div>
     </nav>
