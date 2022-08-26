@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run(GithubSource $githubSource)
+    public function run(/*GithubSource $githubSource*/)
     {
 
         $details = [
