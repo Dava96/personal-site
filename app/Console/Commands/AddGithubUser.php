@@ -58,7 +58,7 @@ class AddGithubUser extends Command
         $this->info('User created: ' . $user);
 
         if ($this->option('post')) {
-            $repoArray = $this->githubSource->getPostInfomationFromRepo('Dava96', 'StarterEdit');
+            $repoArray = $this->githubSource->getPostInformationFromRepo('Dava96', 'StarterEdit');
             $githubRepo = GithubRepo::make($repoArray);
 
             $category = Category::firstOrCreate(['name' => $githubRepo->language, 'slug' => Str::slug($githubRepo->language)]);

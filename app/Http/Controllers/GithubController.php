@@ -27,7 +27,7 @@ class GithubController extends Controller
         $attributes['user_id'] = auth()->id();
         $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
 
-        $repoArray =  $githubSource->getPostInfomationFromRepo($user->github_username, $attributes['repo_name']);
+        $repoArray =  $githubSource->getPostInformationFromRepo($user->github_username, $attributes['repo_name']);
         $githubRepo = GithubRepo::make($repoArray);
         $category = Category::firstOrCreate(['name' => $githubRepo->language, 'slug' => Str::slug($githubRepo->language)]);
         $post = Post::create([

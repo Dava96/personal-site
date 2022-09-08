@@ -13,7 +13,7 @@ class AddGithubUserTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected function getMockPostInformationResponse()
+    protected function getMockPostInformationResponse(): array
     {
         return [
             'repo_name'        => 'Name', // Set to title
@@ -42,7 +42,7 @@ class AddGithubUserTest extends TestCase
     public function testAddGithubUserAndPost() {
         $gitHubSource = $this->mock(GithubSource::class, function(MockInterface $mock) {
             $mock
-                ->shouldReceive('getPostInfomationFromRepo')
+                ->shouldReceive('getPostInformationFromRepo')
                 ->once()
                 ->andReturn(
                     $this->getMockPostInformationResponse()

@@ -15,7 +15,8 @@ class GithubSource
         $this->client->authenticate($accessToken, Client::AUTH_ACCESS_TOKEN);
     }
 
-    public function getPostInfomationFromRepo($githubUser, $repoName) {
+    public function getPostInformationFromRepo($githubUser, $repoName): array
+    {
         $repo = $this->client->api('repo')->show($githubUser, $repoName);
 
         try {
