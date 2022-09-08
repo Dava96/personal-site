@@ -2,37 +2,65 @@
 
 namespace Tests\Feature;
 
+use App\Components\GithubSource;
+use App\Console\Commands\AddGithubUser;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Mockery\MockInterface;
 use Tests\TestCase;
 
 class AddGithubUserTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function getMockPostInformationResponse()
+    {
+        return [
+            'repo_name'        => 'Name', // Set to title
+            'description'      => 'Description', // Set to excerpt
+            'read_me'          => 'Readme text', // set to body
+            'html_url'         => 'https://www.github.com/test', // use link in a find on github button
+            'language'         => 'php', // use to categorise
+            'created_at'       => 0, // timestamp
+            'updated_at'       => 0, // timestamp
+            'stargazers_count' => 1337, // stats panel
+            'watchers_count'   => 2,
+            'forks_count'      => 0,
+            'fork'             => false, // could use this to display the post or not, since it's true or false
+        ];
+    }
+
     public function testAddGithubUser() {
-        $this->artisan('AddGithubUser')->assertExitCode(1);
+        $this->artisan('AddGithubUser')->assertSuccessful();
 
         $this->assertDatabaseHas('users', [
             'github_username' => 'Dava96'
         ]);
 
-        $this->artisan('AddGithubUser')->assertSuccessful();
     }
 
     public function testAddGithubUserAndPost() {
-        $this->artisan('AddGithubUser --post')->assertExitCode(1);
+        $gitHubSource = $this->mock(GithubSource::class, function(MockInterface $mock) {
+            $mock
+                ->shouldReceive('getPostInfomationFromRepo')
+                ->once()
+                ->andReturn(
+                    $this->getMockPostInformationResponse()
+                );
+        });
+
+        $this->app->instance(GithubSource::class, $gitHubSource);
+
+        $this->artisan('AddGithubUser --post')
+            ->assertSuccessful();
 
         $this->assertDatabaseHas('github_repos', [
-            'repo_name' => 'StarterEdit'
+            'repo_name' => 'Name'
         ]);
-
-        $this->artisan('AddGithubUser --post')->assertSuccessful();
     }
 
     public function testItWontAllowAnotherUserToBeAdded() {
-        $this->artisan('AddGithubUser');
-
-        $this->artisan('AddGithubUser')->assertExitCode(0);
+        $this->artisan('AddGithubUser')->assertSuccessful();
+        $this->artisan('AddGithubUser')->assertFailed();
     }
 }

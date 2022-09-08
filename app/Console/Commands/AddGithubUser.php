@@ -28,6 +28,7 @@ class AddGithubUser extends Command
 
     public function __construct(GithubSource $githubSource)
     {
+        //TODO Pipeline is failing after I added this
         $this->githubSource = $githubSource;
         parent::__construct();
     }
@@ -41,7 +42,7 @@ class AddGithubUser extends Command
     {
         if (User::whereUsername('DavidLomathConnis')->exists()) {
             $this->error('User already exists..');
-            return 0;
+            return self::FAILURE;
         }
 
         $user = new User([
@@ -75,6 +76,7 @@ class AddGithubUser extends Command
             $githubRepo->save();
             $post->save();
         }
-        return 1;
+
+        return self::SUCCESS;
     }
 }
