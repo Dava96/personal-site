@@ -28,7 +28,6 @@ class AddGithubUser extends Command
 
     public function __construct(GithubSource $githubSource)
     {
-        //TODO Pipeline is failing after I added this
         $this->githubSource = $githubSource;
         parent::__construct();
     }
