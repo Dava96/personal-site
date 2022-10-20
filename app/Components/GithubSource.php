@@ -27,7 +27,7 @@ class GithubSource
 
         $readMe = $this->client->api('markdown')->render($readMe, 'markdown');
 
-        $pattern = '<h1.*?>\s.+'.$repo['name'].'<\/h1>\n?';
+        $pattern = '(?i)<h1.*?><a.*?\s.+'.$repo['name'].'.*\n?<\/h1>';
         if (preg_match("/$pattern/", $readMe)) {
             $readMe = $this->stripPostTitleFromBody($readMe, $pattern);
         }
