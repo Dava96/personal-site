@@ -3,9 +3,7 @@
 namespace Tests\Feature;
 
 use App\Components\GithubSource;
-use App\Console\Commands\AddGithubUser;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Mockery\MockInterface;
 use Tests\TestCase;
 

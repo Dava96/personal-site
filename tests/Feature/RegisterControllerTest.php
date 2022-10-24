@@ -2,8 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Components\GithubSource;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
