@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Components\GithubSource;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -11,6 +12,16 @@ class RegisterControllerTest extends TestCase
 {
     use WithFaker;
     use RefreshDatabase;
+
+    protected GithubSource $githubSource;
+    protected RegisterController $registerController;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->githubSource = $this->createMock(GithubSource::class);
+        $this->registerController = new RegisterController($this->githubSource);
+    }
 
     public function testItRegistersANewUser()
     {
