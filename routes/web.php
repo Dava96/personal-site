@@ -9,16 +9,15 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [PostController::class, 'index'])->name('home');
-Route::get('posts/{post:slug}', [PostController::class, 'show']);
+Route::get('/', [PostController::class, 'index'])->name('posts.home');
+Route::get('posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
 
 Route::get('register', [RegisterController::class, 'create'])->middleware('guest')->name('register.create');
 Route::post('register', [RegisterController::class, 'store'])->middleware('guest')->name('register.store');
 
-Route::post('logout', [SessionController::class, 'destroy'])->middleware('auth');
-
-Route::get('login', [SessionController::class, 'create'])->middleware('guest');
-Route::post('login', [SessionController::class, 'store'])->middleware('guest');
+Route::get('login', [SessionController::class, 'create'])->middleware('guest')->name('session.create');
+Route::post('login', [SessionController::class, 'store'])->middleware('guest')->name('session.store');
+Route::post('logout', [SessionController::class, 'destroy'])->middleware('auth')->name('session.destroy');
 
 Route::post('posts/{post:slug}/comments', [PostCommentsController::class, 'store'])->middleware('auth');
 

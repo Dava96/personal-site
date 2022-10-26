@@ -25,6 +25,8 @@ class RegisterControllerTest extends TestCase
 
     public function testItRegistersANewUser()
     {
+        $this->withoutMiddleware();
+
         $this->post('/register', $this->userDataProvider())
             ->assertStatus(302)
             ->assertRedirect('/');
