@@ -8,11 +8,19 @@ use Illuminate\Validation\Rule;
 
 class RegisterController extends Controller
 {
+
+    protected GithubSource $githubSource;
+
+    public function __construct(GithubSource $githubSource)
+    {
+        $this->githubSource = $githubSource;
+    }
+
     public function create() {
         return view('register.create');
     }
 
-    public function store(GithubSource $githubSource) {
+    public function store() {
         $attributes = request()->validate([
             'name' => ['required', 'min:3', 'max:255'],
             'username'=> ['required', 'min:3', 'max:255', Rule::unique('users', 'username')],
@@ -21,7 +29,7 @@ class RegisterController extends Controller
             'password' => ['required', 'min:7', 'max:255']
         ]);
 
-        $attributes = array_merge($attributes, $githubSource->getUserInformation($attributes['github_username']));
+        $attributes = array_merge($attributes, $this->githubSource->getUserInformation($attributes['github_username']));
         auth()->login(User::create($attributes));
 
         return redirect('/')->with('success', 'Your account has been created.');

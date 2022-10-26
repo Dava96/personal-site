@@ -47,7 +47,8 @@ class GithubSource
         ];
     }
 
-    public function getUserInformation($username) {
+    public function getUserInformation($username): array
+    {
         $user = $this->client->api('user')->show($username);
 
         return [
