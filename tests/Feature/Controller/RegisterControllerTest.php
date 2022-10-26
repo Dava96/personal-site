@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Controller;
 
 use App\Components\GithubSource;
 use App\Http\Controllers\RegisterController;
@@ -26,12 +26,13 @@ class RegisterControllerTest extends TestCase
     public function testItRegistersANewUser()
     {
         $this->markTestSkipped('Needs github auth in the pipeline otherwise it will fail');
-        //TODO add github auth in secrets 
+        //TODO add github auth in secrets, otherwise it works
         $this->withoutMiddleware();
 
-        $this->post('/register', $this->userDataProvider())
+        $response = $this->post('/register', $this->userDataProvider())
             ->assertStatus(302)
-            ->assertRedirect('/');
+            ->assertRedirect('/')
+            ->assertSessionHas('success', 'Your account has been created.');
 
         $this->assertDatabaseHas('users', ['github_username' => 'Dava96']);
     }
@@ -41,6 +42,12 @@ class RegisterControllerTest extends TestCase
         $this->get('/register', $this->userDataProvider())
             ->assertStatus(200)
             ->assertViewIs('register.create');
+    }
+
+    public function testItFailsOnUserCreate()
+    {
+        $this->get(route('register.create'))
+            ->assertStatus(200);
     }
 
     public function userDataProvider(): array
