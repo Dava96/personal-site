@@ -36,7 +36,7 @@ class SessionControllerTest extends TestCase
 
     public function testLogout()
     {
-        $this->markTestIncomplete("It's kinda broken lol");
+        $this->markTestSkipped("It's kinda broken lol");
         $this->withMiddleware();
 
         $this->post(route('session.destroy'), $this->userDataProvider()->toArray())
