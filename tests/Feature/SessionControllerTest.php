@@ -36,7 +36,8 @@ class SessionControllerTest extends TestCase
 
     public function testLogout()
     {
-        $this->markTestSkipped("It's kinda broken lol");
+        $this->markTestSkipped("I think it needs to a user to be authed to then logout");
+        //TODO fix
         $this->withMiddleware();
 
         $this->post(route('session.destroy'), $this->userDataProvider()->toArray())
