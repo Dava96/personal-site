@@ -65,6 +65,7 @@ class UserTest extends TestCase
     public function testSendNotificationEmail()
     {
         $comm = new CommentFormSubmission($this->user, $this->comment);
+        $comm->from('admin@test.com');
         $this->user->sendNotificationEmail($this->comment);
         $comm->assertSeeInHtml($this->comment->body);
     }
