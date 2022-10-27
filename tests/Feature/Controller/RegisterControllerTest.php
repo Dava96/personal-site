@@ -1,11 +1,12 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Controller;
 
 use App\Components\GithubSource;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Mockery\MockInterface;
 use Tests\TestCase;
 
 class RegisterControllerTest extends TestCase
@@ -13,25 +14,33 @@ class RegisterControllerTest extends TestCase
     use WithFaker;
     use RefreshDatabase;
 
-    protected GithubSource $githubSource;
+    protected GithubSource $githubMock;
     protected RegisterController $registerController;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->githubSource = $this->createMock(GithubSource::class);
-        $this->registerController = new RegisterController($this->githubSource);
+        $this->githubMock = $this->createMock(GithubSource::class);
+        $this->registerController = new RegisterController($this->githubMock);
     }
 
     public function testItRegistersANewUser()
     {
-        $this->markTestSkipped('Needs github auth in the pipeline otherwise it will fail');
-        //TODO add github auth in secrets 
         $this->withoutMiddleware();
+
+        $this->mock(GithubSource::class, function(MockInterface $mock) {
+            $mock
+                ->shouldReceive('getUserInformation')
+                ->once()
+                ->andReturn(
+                    $this->userDataProvider()
+                );
+        });
 
         $this->post('/register', $this->userDataProvider())
             ->assertStatus(302)
-            ->assertRedirect('/');
+            ->assertRedirect('/')
+            ->assertSessionHas('success', 'Your account has been created.');
 
         $this->assertDatabaseHas('users', ['github_username' => 'Dava96']);
     }
@@ -41,6 +50,12 @@ class RegisterControllerTest extends TestCase
         $this->get('/register', $this->userDataProvider())
             ->assertStatus(200)
             ->assertViewIs('register.create');
+    }
+
+    public function testItFailsOnUserCreate()
+    {
+        $this->get(route('register.create'))
+            ->assertStatus(200);
     }
 
     public function userDataProvider(): array

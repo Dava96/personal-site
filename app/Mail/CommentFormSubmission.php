@@ -34,6 +34,7 @@ class CommentFormSubmission extends Mailable implements ShouldQueue
     {
         return $this
             ->subject("New Comment Submission by: {$this->user->name}")
+            ->from('test@example.com')
             ->replyTo($this->user->email, $this->user->name)
             ->view('components.emails.comment-form-submission');
 

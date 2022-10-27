@@ -48,6 +48,12 @@ class Post extends Model
 
     protected $fillable = ['title', 'slug', 'user_id', 'excerpt', 'body', 'category_id'];
 
+    /**
+     * @param       $query
+     * @param array $filters
+     *
+     * @return void
+     */
     public function scopeFilter($query, array $filters)
     {
 
