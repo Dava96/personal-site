@@ -10,6 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Testing\Fakes\MailFake;
 use Tests\TestCase;
 
 class UserTest extends TestCase
@@ -65,9 +66,8 @@ class UserTest extends TestCase
 
     public function testSendNotificationEmail()
     {
-        $this->markTestSkipped('Fails on pipeline because there isnt mail creds setup on the pipeline');
-        $comm = new CommentFormSubmission($this->user, $this->comment);
+        Mail::fake();
         $this->user->sendNotificationEmail($this->comment);
-        $comm->assertSeeInHtml($this->comment->body);
+        Mail::assertQueued(CommentFormSubmission::class);
     }
 }
