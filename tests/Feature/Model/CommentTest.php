@@ -56,6 +56,9 @@ class CommentTest extends TestCase
     {
         $commentOnPost = $this->post->comments->toArray();
         $commentOnPost = $commentOnPost[0];
+
+        $this->assertInstanceOf(Post::class, $this->comment->post);
+
         $this->assertEquals($commentOnPost['id'], $this->comment->id);
         $this->assertEquals($commentOnPost['post_id'], $this->comment->post_id);
         $this->assertEquals($commentOnPost['user_id'], $this->comment->user_id);
@@ -65,5 +68,10 @@ class CommentTest extends TestCase
     public function testCommentWasMadeByCorrectUser()
     {
         $this->assertEquals($this->user->id, $this->comment->user_id);
+    }
+
+    public function testCommentAuthor()
+    {
+        $this->assertInstanceOf(User::class, $this->comment->author);
     }
 }
